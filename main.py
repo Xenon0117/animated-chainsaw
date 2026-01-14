@@ -29,7 +29,7 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
         "sslmode": "require"      # Explicitly enforce SSL (redundant but safe)
     }
 }
-DOWNLOAD_FOLDER = 'Downloadables'
+DOWNLOAD_FOLDER = 'static/downloadables'
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 app.config["SECRET_KEY"] = os.environ['FLASK_KEY']
 
@@ -76,7 +76,7 @@ def admin_only(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         #If id is not 1 then return abort with 403 error
-        if current_user.id != 1:
+        if current_user.email != "devilsayan16@gmail.com":
             return abort(403)
         #Otherwise continue with the route function
         return f(*args, **kwargs)        

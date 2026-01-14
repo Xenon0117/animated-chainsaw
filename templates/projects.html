@@ -34,20 +34,20 @@ Projects{% endif %}{% endblock %}
     {% elif id == 2 %}
     <!-- PCB Projects -->
     {% set projects = [
-    {'img': 'FMT_Controller.png', 'title': 'Controller PCB', 'desc': 'Controller PCB for 15W FM Transmitter.'},
-    {'img': 'PA.png', 'title': 'PA PCB', 'desc': '150W RF Power Amplifier PCB.'},
-    {'img': 'EXCITER.png', 'title': 'Exciter PCB', 'desc': '1W Exciter PCB for 100W FM Trasnsmitter.'},
-    {'img': 'SLM_C.png', 'title': 'Controller PCB', 'desc': 'Controller PCB for Sound Level Meter.'},
-    {'img': 'SLM_P.png', 'title': 'Power Supply PCB', 'desc': 'Power Supply PCB for Sound Level Meter.'},
-    {'img': 'PAL.png', 'title': 'Sound Limiter PCB', 'desc': 'Controller PCB for Sound Limiter.'},
-    {'img': 'AMPLI.png', 'title': 'Amplispeaker PCB', 'desc': 'Controller PCB for Ampli-Speaker.'}
+    {'img': 'fmt_controller.png', 'title': 'Controller PCB', 'desc': 'Controller PCB for 15W FM Transmitter.'},
+    {'img': 'pa.png', 'title': 'PA PCB', 'desc': '150W RF Power Amplifier PCB.'},
+    {'img': 'exciter.png', 'title': 'Exciter PCB', 'desc': '1W Exciter PCB for 100W FM Trasnsmitter.'},
+    {'img': 'slm_c.png', 'title': 'Controller PCB', 'desc': 'Controller PCB for Sound Level Meter.'},
+    {'img': 'slm_p.png', 'title': 'Power Supply PCB', 'desc': 'Power Supply PCB for Sound Level Meter.'},
+    {'img': 'pal.png', 'title': 'Sound Limiter PCB', 'desc': 'Controller PCB for Sound Limiter.'},
+    {'img': 'ampli.png', 'title': 'Amplispeaker PCB', 'desc': 'Controller PCB for Ampli-Speaker.'}
     ] %}
     {% elif id == 3 %}
     <!-- 3D Models -->
     {% set projects = [
-    {'img': 'Part Studio 1 (1).png', 'title': 'KIOSK', 'desc': 'Kiosk Design for Govt Project', 'pdf': 'D1.pdf'},
-    {'img': 'Part Studio 1.png', 'title': 'Furniture', 'desc': 'Kitchen Furniture Design', 'pdf': 'D2.pdf'},
-    {'img': 'NEW DESIGN.png', 'title': 'Furniture', 'desc': 'Furniture Design', 'pdf': 'D3.pdf'}
+    {'img': 'part_studio1.png', 'title': 'KIOSK', 'desc': 'Kiosk Design for Govt Project', 'pdf': 'D1.pdf'},
+    {'img': 'part_studio2.png', 'title': 'Furniture', 'desc': 'Kitchen Furniture Design', 'pdf': 'D2.pdf'},
+    {'img': 'new_design.png', 'title': 'Furniture', 'desc': 'Furniture Design', 'pdf': 'D3.pdf'}
     ] %}
     {% else %}
     <!-- Electronics Projects -->
@@ -62,12 +62,12 @@ Projects{% endif %}{% endblock %}
             {% if item.video %}
             <video controls class="img-fluid rounded shadow" style="max-height: 400px;">
                 <source
-                    src="{{ url_for('static', filename='Files/Projects/' + ('Python' if id==1 else 'Electronics' if id==4 else '3D' if id==3 else 'PCB') + '/' + item.video) }}"
+                    src="{{ url_for('static', filename='files/projects/' + ('python' if id==1 else 'electronics' if id==4 else '3d' if id==3 else 'pcb') + '/' + item.video) }}"
                     type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             {% elif item.img %}
-            <img src="{{ url_for('static', filename='Files/Projects/' + ('PCB' if id==2 else '3D') + '/' + item.img) }}"
+            <img src="{{ url_for('static', filename='files/projects/' + ('pcb' if id==2 else '3d') + '/' + item.img) }}"
                 class="img-fluid rounded shadow" alt="{{ item.title }}" loading="lazy">
             {% endif %}
         </div>
