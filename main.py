@@ -19,7 +19,11 @@ load_dotenv()
 year=datetime.now().strftime("%Y")
 
 #Initialize 
-app=Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder="static",
+    static_url_path="/static"
+)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DB_URI']
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
