@@ -8,12 +8,11 @@
   ],
   "routes": [
     {
-      "src": "/download/(.*)",
-      "dest": "main.py"
-    },
-    {
       "src": "/(.*)",
       "dest": "main.py"
     }
-  ]
+  ],
+  "env": {
+    "PYTHONUNBUFFERED": "1"
+  }
 }
