@@ -61,15 +61,11 @@ Projects{% endif %}{% endblock %}
         <div class="col-lg-6 text-center {% if loop.index % 2 == 0 %}order-lg-2{% endif %}">
             {% if item.video %}
             <video controls class="img-fluid rounded shadow" style="max-height: 400px;">
-                <source src="/files/projects/{{ 'python' if id==1 else 'electronics' if id==4 else '3d' if id==3 else 'pcb' }}/{{ item.video }}"
-  type="video/mp4">  
+                <source src="{{ url_for('static', filename='files/projects/' + ('python' if id==1 else 'electronics' if id==4 else '3d' if id==3 else 'pcb') + '/' + item.video) }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             {% elif item.img %}
-            <img src="/files/projects/{{ 'pcb' if id==2 else '3d' }}/{{ item.img }}"
-     class="img-fluid rounded shadow"
-     alt="{{ item.title }}"
-     loading="lazy">
+            <img src="{{ url_for('static', filename='files/projects/' + ('pcb' if id==2 else '3d') + '/' + item.img) }}" class="img-fluid rounded shadow" alt="{{ item.title }}" loading="lazy">
             {% endif %}
         </div>
         <div class="col-lg-6 {% if loop.index % 2 == 0 %}text-lg-start{% else %}text-lg-start{% endif %}">
