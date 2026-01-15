@@ -29,7 +29,7 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
         "sslmode": "require"      # Explicitly enforce SSL (redundant but safe)
     }
 }
-DOWNLOAD_FOLDER = 'static/downloadables'
+DOWNLOAD_FOLDER = 'downloadables'
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 app.config["SECRET_KEY"] = os.environ['FLASK_KEY']
 
