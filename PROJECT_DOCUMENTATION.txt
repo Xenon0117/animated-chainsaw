@@ -21,6 +21,13 @@ Portfolio/
 ├── Procfile                       (Heroku/Procfile configuration)
 ├── reqs.py                        (Requirements helper)
 ├── requirements.txt               (Python dependencies)
+├── Dockerfile                     (Docker configuration for containerization)
+├── fly.toml                       (Fly.io deployment configuration)
+│
+├── downloadables/                 (PDF files for download - ROOT LEVEL)
+│   ├── d1.pdf
+│   ├── d2.pdf
+│   └── d3.pdf
 │
 ├── static/                        (Static assets folder)
 │   ├── icon.ico                   (Website favicon)
@@ -28,11 +35,6 @@ Portfolio/
 │   │
 │   ├── css/                       (Stylesheets)
 │   │   └── style.css              (Main CSS file)
-│   │
-│   ├── downloadables/             (PDFs for download)
-│   │   ├── d1.pdf
-│   │   ├── d2.pdf
-│   │   └── d3.pdf
 │   │
 │   └── files/                     (Project media files)
 │       ├── profile_pic/
@@ -115,7 +117,7 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
         "sslmode": "require"      # Explicitly enforce SSL (redundant but safe)
     }
 }
-DOWNLOAD_FOLDER = 'static/downloadables'
+DOWNLOAD_FOLDER = 'downloadables'
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 app.config["SECRET_KEY"] = os.environ['FLASK_KEY']
 
