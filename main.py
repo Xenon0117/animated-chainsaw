@@ -19,7 +19,11 @@ load_dotenv()
 year=datetime.now().strftime("%Y")
 
 #Initialize 
-app=Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder="public",
+    static_url_path="/"
+)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DB_URI']
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
@@ -29,7 +33,7 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
         "sslmode": "require"      # Explicitly enforce SSL (redundant but safe)
     }
 }
-DOWNLOAD_FOLDER = 'static/downloadables'
+DOWNLOAD_FOLDER = 'public/downloadables'
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 app.config["SECRET_KEY"] = os.environ['FLASK_KEY']
 
