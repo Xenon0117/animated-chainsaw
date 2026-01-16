@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
-{% block title %}{% if id==1 %}Python Works{% elif id==2 %}PCB Designs{% elif id==3 %}3D Models{% else %}Electronics
-Projects{% endif %}{% endblock %}
+{% block title %}{% if id==1 %}Python Works{% elif id==2 %}PCB Designs{% elif id==3 %}3D Models{% elif id==4 %}Electronics
+Projects{% elif id==5 %}Tool-Box{% endif %}{% endblock %}
 {% block content %}
 <div class="container py-5">
     <h1 class="text-center mb-5">
         {% if id==1 %}Python Works
         {% elif id==2 %}PCB Designs
         {% elif id==3 %}3D Models
-        {% else %}Electronics Projects{% endif %}
+        {% elif id==4 %}Electronics Projects
+        {% else %}Tool-Box{% endif %}
     </h1>
 
     {% if id == 1 %}
     <!-- Python Projects -->
+    {% set folder = 'python' %}
     {% set projects = [
     {'video': 'turtle.mp4', 'title': 'Turtle Racing', 'desc': 'Turtle Racing game using Python Turtle Module.', 'link':
     'https://github.com/Xenon0117/Turtle-Racing'},
@@ -33,6 +35,7 @@ Projects{% endif %}{% endblock %}
     ] %}
     {% elif id == 2 %}
     <!-- PCB Projects -->
+    {% set folder = 'pcb' %}
     {% set projects = [
     {'img': 'fmt_controller.png', 'title': 'Controller PCB', 'desc': 'Controller PCB for 15W FM Transmitter.'},
     {'img': 'pa.png', 'title': 'PA PCB', 'desc': '150W RF Power Amplifier PCB.'},
@@ -44,35 +47,47 @@ Projects{% endif %}{% endblock %}
     ] %}
     {% elif id == 3 %}
     <!-- 3D Models -->
+    {% set folder = '3d' %}
     {% set projects = [
     {'img': 'part_studio1.png', 'title': 'KIOSK', 'desc': 'Kiosk Design for Govt Project', 'pdf': 'D1.pdf'},
     {'img': 'part_studio2.png', 'title': 'Furniture', 'desc': 'Kitchen Furniture Design', 'pdf': 'D2.pdf'},
     {'img': 'new_design.png', 'title': 'Furniture', 'desc': 'Furniture Design', 'pdf': 'D3.pdf'}
     ] %}
-    {% else %}
+    {% elif id == 4 %}
     <!-- Electronics Projects -->
+    {% set folder = 'electronics' %}
     {% set projects = [
     {'video': 'project.mp4', 'title': 'Smart Switch', 'desc': 'Bluetooth controlled Smart Switch with ESP-32 board'}
     ] %}
+    {% else %}
+    <!-- Tool-Box -->
+    {% set folder = 'tool_box' %}
+    {% set projects = [
+    {'img': 'toolbox.png','title': 'Tool Box', 'desc': 'A versatile collection of web-based tools for everyday tasks.', 'link': 'https://tool-box-gamma.vercel.app/'}
+    ] %}
     {% endif %}
+
+
 
     {% for item in projects %}
     <div class="row align-items-center g-5 mb-5 pb-4 border-bottom border-secondary">
         <div class="col-lg-6 text-center {% if loop.index % 2 == 0 %}order-lg-2{% endif %}">
             {% if item.video %}
             <video controls class="img-fluid rounded shadow" style="max-height: 400px;">
-                <source src="{{ url_for('static', filename='files/projects/' + ('python' if id==1 else 'electronics' if id==4 else '3d' if id==3 else 'pcb') + '/' + item.video) }}" type="video/mp4">
+                <source src="{{ url_for('static', filename='files/projects/' + folder + '/' + item.video) }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             {% elif item.img %}
-            <img src="{{ url_for('static', filename='files/projects/' + ('pcb' if id==2 else '3d') + '/' + item.img) }}" class="img-fluid rounded shadow" alt="{{ item.title }}" loading="lazy">
+            <img src="{{ url_for('static', filename='files/projects/' + folder + '/' + item.img) }}" class="img-fluid rounded shadow" alt="{{ item.title }}" loading="lazy">
             {% endif %}
         </div>
         <div class="col-lg-6 {% if loop.index % 2 == 0 %}text-lg-start{% else %}text-lg-start{% endif %}">
             <h2 class="display-6 fw-bold mb-3">{{ item.title }}</h2>
             <p class="lead">{{ item.desc }}</p>
             {% if item.link %}
-            <a href="{{ item.link }}" target="_blank" class="btn btn-outline-primary">View on GitHub</a>
+            <a href="{{ item.link }}" target="_blank" class="btn btn-outline-primary">
+                {% if 'github.com' in item.link %}View on GitHub{% else %}Visit Website{% endif %}
+            </a>
             {% elif item.pdf %}
             <a href="{{ url_for('download_file', filename=item.pdf) }}" class="btn btn-outline-primary">Download PDF</a>
             {% endif %}

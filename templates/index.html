@@ -49,7 +49,7 @@
         <h2 class="display-5 fw-bold text-center mb-5 pb-3 border-bottom">My Projects 💻</h2>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
             {% for pid, title in [(1, 'Python Works'), (2, 'PCB Designs'), (3, '3D Models'), (4, 'Electronics
-            Projects')] %}
+            Projects'),(5, 'Tool-Box')] %}
             <div class="col d-flex justify-content-center">
                 <a href="{{ url_for('projects', project_id=pid) }}" class="text-decoration-none">
                     <div class="project-card rounded-4 shadow-lg d-flex align-items-center justify-content-center text-white text-center p-4"
