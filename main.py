@@ -6,6 +6,7 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase,Mapped,mapped_column
 from sqlalchemy import Integer,String
+from sqlalchemy.pool import NullPool
 from flask_login import LoginManager,UserMixin,login_user,logout_user,login_required,current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
@@ -20,18 +21,18 @@ year=datetime.now().strftime("%Y")
 
 #Initialize 
 app=Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DB_URI']
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DB_URI')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
     "pool_pre_ping": True,        # ← Critical: validates connection before use
-    "pool_recycle": 300,          # Recycle connections every 5 minutes
+    "poolclass": NullPool,        # Vercel/Serverless: Don't maintain a pool, close immediately
     "connect_args": {
         "sslmode": "require"      # Explicitly enforce SSL (redundant but safe)
     }
 }
 DOWNLOAD_FOLDER = 'downloadables'
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
-app.config["SECRET_KEY"] = os.environ['FLASK_KEY']
+app.config["SECRET_KEY"] = os.getenv('FLASK_KEY', 'default-dev-key')
 
 #Initialize DB
 class Base(DeclarativeBase):
@@ -63,7 +64,11 @@ class DataBase(db.Model):
 
 #Create DataBase
 with app.app_context():
-    db.create_all()
+    try:
+        db.create_all()
+    except Exception as e:
+        print(f"Database connection failed on startup: {e}")
+        # We don't raise here, allowing the app to start even if DB is down
 
 # Load user for Flask-Login
 @login_manager.user_loader
