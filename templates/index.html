@@ -47,13 +47,13 @@
     <br><br><br id="projects">
     <div class="container px-4 py-5" id="custom-cards">
         <h2 class="display-5 fw-bold text-center mb-5 pb-3 border-bottom">My Projects 💻</h2>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 justify-content-center">
             {% for pid, title in [(1, 'Python Works'), (2, 'PCB Designs'), (3, '3D Models'), (4, 'Electronics
             Projects'),(5, 'Tool-Box')] %}
             <div class="col d-flex justify-content-center">
                 <a href="{{ url_for('projects', project_id=pid) }}" class="text-decoration-none">
                     <div class="project-card rounded-4 shadow-lg d-flex align-items-center justify-content-center text-white text-center p-4"
-                        style="background: linear-gradient(135deg, #8a2be2, #6a1cb0); width: 220px; height: 220px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                        style="background: linear-gradient(135deg, #8a2be2, #6a1cb0); height: 220px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
                         <h3 class="fw-bold fs-4">{{ title }}</h3>
                     </div>
                 </a>
