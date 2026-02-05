@@ -38,10 +38,10 @@ class Req:
             print("Quote API failed:", e)
 
             # fallback quote
-            data = {
+            data = [{
                 'quote': "Technology is best when it brings people together",
                 'author': "Matt Mullenweg"
-            }
+            }]
 
         self.quote = data[0]['quote']
         self.author = data[0]['author']
