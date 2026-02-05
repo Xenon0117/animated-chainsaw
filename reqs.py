@@ -29,7 +29,7 @@ quote_uri="https://api.api-ninjas.com/v2/randomquotes"
 class Req:
     def __init__(self):
         try:
-            response=requests.get(quote_uri,headers={"X-Api-Key":API_KEY})
+            response=requests.get(quote_uri,headers={"X-Api-Key":api})
             response.raise_for_status()
 
             data = response.json()
